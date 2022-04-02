@@ -1,350 +1,127 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
 import Spinner from "./Spinner";
+import PropTypes from 'prop-types'
 
 export class News extends Component {
-  articles = [
-    {
-      source: { id: "associated-press", name: "Associated Press" },
-      author: "Nebi Qena",
-      title:
-        "Russians leave Chernobyl site as fighting rages elsewhere - The Associated Press",
-      description:
-        "KYIV, Ukraine (AP) — Russian troops handed control of the Chernobyl nuclear power plant back to the Ukrainians and left the heavily contaminated site early Friday, more than a month after taking it over, Ukrainian authorities said, as fighting raged on the ou…",
-      url: "https://apnews.com/article/russia-ukraine-kyiv-europe-united-states-nato-5863ad1d740cdd04ba42a25de0d31449",
-      urlToImage:
-        "https://storage.googleapis.com/afs-prod/media/83541f32fb1c44dfa70060e86754a4e4/3000.jpeg",
-      publishedAt: "2022-04-01T00:02:38Z",
-      content:
-        "KYIV, Ukraine (AP) Russian troops handed control of the Chernobyl nuclear power plant back to the Ukrainians and left the heavily contaminated site early Friday, more than a month after taking it ove… [+8005 chars]",
-    },
-    {
-      source: { id: null, name: "Deadline" },
-      author: "Tom Tapp",
-      title:
-        "New Mutant “XE” Omicron Variant May Be The Most Transmissible Version Of Covid Yet, According To WHO - Deadline",
-      description:
-        "The CDC announced this week that the BA.2 Omicron variant, which is reportedly 30% more transmissible than the original BA.1 Omicron strain — has become dominant among new cases sequenced in the United States. That’s a startling rise for a variant that was le…",
-      url: "https://deadline.com/2022/03/new-xe-covid-variant-omicron-most-transmissible-1234992060/",
-      urlToImage:
-        "https://deadline.com/wp-content/uploads/2021/12/51484419260_9a938f98b0_k.jpg?w=1024",
-      publishedAt: "2022-03-31T23:46:00Z",
-      content:
-        "The CDC announced this week that the BA.2 Omicron variant, which is reportedly 30% more transmissible than the original BA.1 Omicron strain — has become dominant among new cases sequenced in the Unit… [+3342 chars]",
-    },
-    {
-      source: { id: null, name: "PEOPLE" },
-      author: "Rachel DeSantis, Daniela Avila",
-      title:
-        "Harry Styles Drops Single 'As It Was,' His First New Music in 2 Years — Listen Now! - PEOPLE",
-      description:
-        "Harry Styles announced his third album, <em>Harry's House</em>, will be out May 20",
-      url: "https://people.com/music/harry-styles-drops-single-as-it-was-first-new-music-harrys-house/",
-      urlToImage:
-        "https://imagesvc.meredithcorp.io/v3/mm/image?q=60&c=sc&poi=%5B780%2C650%5D&w=1500&h=750&url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F20%2F2022%2F03%2F31%2Fharry-styles-as-it-was.jpg",
-      publishedAt: "2022-03-31T23:36:00Z",
-      content:
-        "No April Fool's joking here — Harry Styles just released his first new music in more than two years.\r\nDays after announcing his forthcoming third album Harry's House, the Grammy-winning singer droppe… [+2754 chars]",
-    },
-    {
-      source: { id: null, name: "CNBC" },
-      author: "Krystal Hur",
-      title: "Cramer's lightning round: AT&T is not a buy - CNBC",
-      description:
-        "\"Mad Money\" host Jim Cramer rings the lightning round bell, which means he's giving his answers to callers' stock questions at rapid speed.",
-      url: "https://www.cnbc.com/2022/03/31/cramers-lightning-round-att-is-not-a-buy.html",
-      urlToImage:
-        "https://image.cnbcfm.com/api/v1/image/104548461-RTX1ILBY.jpg?v=1529452319&w=1920&h=1080",
-      publishedAt: "2022-03-31T23:31:48Z",
-      content:
-        "EVgo Inc: \"The only electric vehicle stock that I'm recommending right now is Tesla. This one's losing a fortune. No thank you.\"\r\nGevo Inc: \"It should be working better here, but it's losing too much… [+368 chars]",
-    },
-    {
-      source: { id: "cbs-news", name: "CBS News" },
-      author: "Kate Gibson",
-      title:
-        "162,000 pounds of Skippy peanut butter recalled due to possible metal fragments - CBS News",
-      description:
-        "Jars of Hormel Foods brand sold by major retailers may contain pieces of steel from manufacturing equipment.",
-      url: "https://www.cbsnews.com/news/skippy-peanut-butter-recall-hormel-foods/",
-      urlToImage:
-        "https://cbsnews1.cbsistatic.com/hub/i/r/2022/03/31/ac08ffab-3499-4382-98c3-98a312b233ac/thumbnail/1200x630/48f703142d6a21352c2f3f1260bf160c/skippy-product-pb-spread-creamy-peanut-butter-reduced-fat-16-3oz.png",
-      publishedAt: "2022-03-31T23:13:00Z",
-      content:
-        "Hormel Foods is recalling almost 81 tons of Skippy peanut butter because the jars sold by Walmart and other retailers may contain small fragments of stainless steel from a piece of manufacturing equi… [+1885 chars]",
-    },
-    {
-      source: { id: null, name: "GMA" },
-      author: "Angeline Jane Bernabe",
-      title:
-        "Oscars producer shares what happened right after Will Smith slapped Chris Rock - GMA",
-      description: "Packer led the Oscars' first all Black production team.",
-      url: "https://www.goodmorningamerica.com/culture/story/oscars-producer-packer-lapd-prepared-arrest-smith-slapping-83788044",
-      urlToImage:
-        "https://s.abcnews.com/images/GMA/smith-rock-slap-02-rt-jef-220327_1648441544185_hpMain_2_16x9_992.jpg",
-      publishedAt: "2022-03-31T22:55:06Z",
-      content: null,
-    },
-    {
-      source: { id: "politico", name: "Politico" },
-      author: null,
-      title:
-        "Cloud of notoriety builds over Cawthorn after sex-and-drugs claims - POLITICO",
-      description:
-        "The North Carolina conservative could be hard to defeat. His latest wild claims about his colleagues are making some Republicans want to try.",
-      url: "https://www.politico.com/news/2022/03/31/cloud-of-notoriety-builds-over-cawthorn-builds-as-sex-and-drugs-comment-00022162",
-      urlToImage:
-        "https://static.politico.com/d1/d2/137123c94624802f271b95d44d1a/congress-divided-republicans-53919.jpg",
-      publishedAt: "2022-03-31T22:44:38Z",
-      content:
-        "And Cawthorns own GOP colleagues spent some of the fundraiser, feet away, quietly joking at his expense, according to people in the room.\r\nThe uncomfortable moment illustrates the awkward position Ca… [+6838 chars]",
-    },
-    {
-      source: { id: "google-news", name: "Google News" },
-      author: null,
-      title:
-        "Bobby Wagner bets on himself and appears to win big with Rams deal - The Seattle Times",
-      description: null,
-      url: "https://news.google.com/__i/rss/rd/articles/CBMicGh0dHBzOi8vd3d3LnNlYXR0bGV0aW1lcy5jb20vc3BvcnRzL3NlYWhhd2tzL2JvYmJ5LXdhZ25lci1iZXRzLW9uLWhpbXNlbGYtYW5kLWFwcGVhcnMtdG8td2luLWJpZy13aXRoLXJhbXMtZGVhbC_SAQA?oc=5",
-      urlToImage: null,
-      publishedAt: "2022-03-31T22:39:07Z",
-      content: null,
-    },
-    {
-      source: { id: null, name: "Daily Mail" },
-      author: "Max Winters, Kieran Jackson",
-      title:
-        "Team-by-team guide to the Qatar World Cup ahead of Friday's draw - Daily Mail",
-      description:
-        "The group stage draw for this year's World Cup takes place on Friday. Here, Sportsmail runs the rule over the teams in contention, picking out star players and looking back at how they got there.",
-      url: "https://www.dailymail.co.uk/sport/football/article-10671591/Team-team-guide-Qatar-World-Cup-ahead-Fridays-draw.html",
-      urlToImage:
-        "https://i.dailymail.co.uk/1s/2022/03/31/11/56045725-0-image-a-25_1648721235347.jpg",
-      publishedAt: "2022-03-31T22:35:34Z",
-      content:
-        "The group stage draw for this year's World Cup takes place on Friday night and teams across the globe are poised to discover who will be their group stage opponents in Qatar.\r\nWe've got a taste of ev… [+45527 chars]",
-    },
-    {
-      source: { id: "politico", name: "Politico" },
-      author: null,
-      title: "House passes insulin bill over insurers' opposition - POLITICO",
-      description:
-        "Despite concerns about the bill’s policy and strategy from both sides of the aisle, nearly all House Democrats as well as a dozen Republicans voted for it Thursday.",
-      url: "https://www.politico.com/news/2022/03/31/house-passes-insulin-bill-00022073",
-      urlToImage:
-        "https://static.politico.com/b6/e2/d090b5384d6390d15b492914cedc/220331-annie-craig-ap-773.jpg",
-      publishedAt: "2022-03-31T22:34:18Z",
-      content:
-        "Despite concerns about the bills policyand strategy from both sides of the aisle, nearly all House Democratsas well as a dozen Republicans voted for it Thursday. Yet it faces slimodds in the Senate, … [+5180 chars]",
-    },
-    {
-      source: { id: "fox-news", name: "Fox News" },
-      author: "Lindsay Kornick",
-      title:
-        "Washington Post slammed for referencing pregnant 'people' rather than women - Fox News",
-      description:
-        'The Washington Post was mocked for referencing pregnant women as “pregnant people" in article published Thursday.',
-      url: "https://www.foxnews.com/media/washington-post-slammed-referencing-pregnant-people-women",
-      urlToImage:
-        "https://static.foxnews.com/foxnews.com/content/uploads/2021/09/Pregnant-Woman-Doctor.jpg",
-      publishedAt: "2022-03-31T22:25:00Z",
-      content:
-        'The Washington Post was mocked for referencing pregnant women as "pregnant people" in article published Thursday. \r\nThe article is titled, "Pregnant people at much higher risk of breakthrough COVID, … [+2877 chars]',
-    },
-    {
-      source: { id: "ars-technica", name: "Ars Technica" },
-      author: "Beth Mole",
-      title:
-        "Ivermectin worthless against COVID in largest clinical trial to date - Ars Technica",
-      description:
-        "The antiparasitic failed to reduce hospitalization and all other severe outcomes.",
-      url: "https://arstechnica.com/science/2022/03/largest-trial-to-date-finds-ivermectin-is-worthless-against-covid/",
-      urlToImage:
-        "https://cdn.arstechnica.net/wp-content/uploads/2022/03/GettyImages-1232836504-760x380.jpeg",
-      publishedAt: "2022-03-31T22:17:31Z",
-      content:
-        "Enlarge/ A box of Ivermectina medicine manufactured by Vitamedic in Brazil.\r\n116 with 72 posters participating\r\nThe largest clinical trial to date on the use of the antiparasitic drug ivermectin agai… [+5856 chars]",
-    },
-    {
-      source: { id: null, name: "Quartz India" },
-      author: "Scott Nover",
-      title:
-        "GameStop follows Tesla and Amazon with a planned stock split - Quartz",
-      description:
-        "The meme stock and video game retailer will make its stock more appealing to retail investors",
-      url: "https://qz.com/2149407/gamestop-follows-tesla-and-amazon-with-a-planned-stock-split/",
-      urlToImage: "https://cms.qz.com/wp-content/uploads/2018/07/quartz-og.jpg",
-      publishedAt: "2022-03-31T22:06:18Z",
-      content:
-        "The video game retailer and perennial meme stock GameStop will split its stock, pending approval by shareholders, according to a new regulatory filing on March 31. The company will increase its total… [+1592 chars]",
-    },
-    {
-      source: { id: null, name: "Tampa Bay Times" },
-      author: "Joey Knight",
-      title:
-        "New Bucs coach Todd Bowles wins day by admitting he ‘blew it’ - Tampa Bay Times",
-      description:
-        "The former defensive coordinator says he must learn to live with his final, failed play call of the 2021 season.",
-      url: "https://www.tampabay.com/sports/bucs/2022/03/31/new-bucs-coach-todd-bowles-wins-day-by-admitting-he-blew-it/",
-      urlToImage:
-        "https://www.tampabay.com/resizer/Q0tF7ySNAC1TqDSxPHCfaLLoZLE=/800x450/smart/cloudfront-us-east-1.images.arcpublishing.com/tbt/ZX2YED5WANHGLIGFK4QU6FWU7A.JPG",
-      publishedAt: "2022-03-31T22:02:02Z",
-      content:
-        "TAMPA To triumph at the news conference, he first had to admit defeat. In that sense, Todd Bowles nailed it, with candor and conciseness.\r\nI blew it, the new Bucs coach said Thursday.\r\nKnow this abou… [+5408 chars]",
-    },
-    {
-      source: { id: "independent", name: "Independent" },
-      author: "Oliver O'Connell",
-      title:
-        "Biden news – live: President opens oil reserve to tackle gas prices, says Putin appears to be ‘self-isolating’ - The Independent",
-      description:
-        "Biden new: Latest updates on Russia, Ukraine, Nato, Trump, Hunter Biden",
-      url: "https://www.independent.co.uk/news/world/americas/us-politics/biden-news-today-oil-reserves-trump-putin-b2047810.html",
-      urlToImage:
-        "https://static.independent.co.uk/2022/03/30/22/1388626461.jpg?quality=75&width=1200&auto=webp",
-      publishedAt: "2022-03-31T21:45:44Z",
-      content:
-        "President Joe Biden has ordered the release of up 1 million barrels of oil per day from the strategic petroleum reserve for the next six months in a bid to control prices that have spiked since the U… [+8782 chars]",
-    },
-    {
-      source: { id: "the-washington-post", name: "The Washington Post" },
-      author: "Marisa Iati",
-      title:
-        "Bruce Willis's family says he has aphasia. Here's what that means. - The Washington Post",
-      description:
-        "The communication disorder can make it hard for someone to understand or express written or spoken language.",
-      url: "https://www.washingtonpost.com/wellness/2022/03/31/bruce-willis-aphasia-cognitive-disorder/",
-      urlToImage:
-        "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://d1i4t8bqe7zgj6.cloudfront.net/03-31-2022/t_a536271da2b343a1bd2342b7e9f91f0f_name_Rich_Fury_Getty_Images.jpg&w=1440",
-      publishedAt: "2022-03-31T20:50:31Z",
-      content:
-        "An announcement by Bruce Williss family that the actor is retiring because of an aphasia diagnosis has shone a spotlight on the communication disorder, which can affect how someone understands or exp… [+257 chars]",
-    },
-    {
-      source: { id: null, name: "Rolling Stone" },
-      author: "Tomás Mier",
-      title:
-        "Foo Fighters Pull Out of Grammys 2022 After Taylor Hawkins Death - Rolling Stone",
-      description:
-        'The band also canceled their scheduled tour stops to "grieve, to heal and to pull our loved ones close"',
-      url: "https://www.rollingstone.com/music/music-news/foo-fighters-grammys-2022-1329591/",
-      urlToImage:
-        "https://www.rollingstone.com/wp-content/uploads/2022/03/foo-fighters-live-2020.jpg",
-      publishedAt: "2022-03-31T20:47:41Z",
-      content:
-        "Foo Fighters will no longer perform at Sunday’s Grammy Awards following the death of drummer Taylor Hawkins last Friday, Rolling Stone has learned.\r\nThe band is nominated for three awards for the nig… [+1415 chars]",
-    },
-    {
-      source: { id: null, name: "The Guardian" },
-      author: "Bethan McKernan",
-      title:
-        "Ukraine in fresh effort to evacuate Mariupol after Red Cross warnings - The Guardian",
-      description:
-        "Humanitarian charity says thousands of civilian lives in danger if they remain in the besieged port city",
-      url: "https://amp.theguardian.com/world/2022/mar/31/ukraine-in-fresh-effort-to-evacuate-mariupol-after-red-cross-warnings",
-      urlToImage:
-        "https://i.guim.co.uk/img/media/8af65706feb09f96fab9b75211f527c8e19d7d77/0_273_3500_2101/master/3500.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=9dd6f1b0091f32cf3203a8e19438aec3",
-      publishedAt: "2022-03-31T20:36:00Z",
-      content:
-        "Ukraine has launched a fresh attempt to rescue civilians from Mariupol after warnings from the Red Cross that thousands of lives depend on the successful evacuation of people trapped in the besieged … [+5381 chars]",
-    },
-    {
-      source: { id: null, name: "The Guardian" },
-      author: "Jessica Glenza, Stephanie Kirchgaessner",
-      title:
-        "Five sets of fetal remains found in anti-abortion activist’s home, DC police say - The Guardian",
-      description:
-        "Lauren Handy claims she gained access to organ bank at university in Seattle but authorities have not disclosed source of fetuses",
-      url: "https://amp.theguardian.com/world/2022/mar/31/five-fetuses-found-anti-abortion-activists-home-dc",
-      urlToImage:
-        "https://i.guim.co.uk/img/media/06f7ffe651799315c0aed3f5bedf5840af653268/0_176_3500_2101/master/3500.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=b72b3bc6ef9c37b983204a5cd6d24a96",
-      publishedAt: "2022-03-31T20:33:00Z",
-      content:
-        "Five sets of human fetal remains were recovered from the Washington DC home of an anti-abortion activist after a raid, the capitals Metropolitan police department confirmed to the Guardian on Thursda… [+2660 chars]",
-    },
-    {
-      source: { id: "cnn", name: "CNN" },
-      author: "Jason Hanna and Melissa Alonso, CNN",
-      title:
-        "2 killed as severe weather hits Florida Panhandle, with more strong storms possible Thursday along East Coast - CNN",
-      description:
-        "Two people are dead and two others are hurt after a tornado struck in the Florida Panhandle on Thursday morning, authorities said -- part of a series of storms that have laid waste to buildings around the South since Wednesday.",
-      url: "https://www.cnn.com/2022/03/31/weather/tornado-forecast-storm-threat-south-thursday/index.html",
-      urlToImage:
-        "https://cdn.cnn.com/cnnnext/dam/assets/220331110335-01-storm-damage-0331-florida-super-tease.jpg",
-      publishedAt: "2022-03-31T20:23:00Z",
-      content:
-        "(CNN)Two people are dead and two others are hurt after a tornado struck in the Florida Panhandle on Thursday morning, authorities said -- part of a series of storms that have laid waste to buildings … [+5856 chars]",
-    },
-  ];
+static defaultProps ={
+ country:'in',
+ pageSize:8,
+ category:'general'
+
+}
+static propTypes ={
+  country:PropTypes.string,
+  pageSize:this.propTypes,
+  category:PropTypes.string
+}
   constructor() {
     super();
     console.log("hello iam a constructor from new component");
     this.state = {
-      articles:this.articles,
+      articles: this.articles,
       loading: false,
       articles: [],
       page: 1,
-    }
+    };
   }
-  async componentDidMount(){ 
-    let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=1bbad9d74ba6431b95e7d9dc1f8ac4b3&page=1&pageSize=${this.props.pageSize}`;
+  async componentDidMount() {
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=1bbad9d74ba6431b95e7d9dc1f8ac4b3&page=1&pageSize=${this.props.pageSize}`;
+    this.setState({ loading: true });
     let data = await fetch(url);
-    let parsedData = await data.json()
-    console.log(parsedData); 
-    this.setState({articles: parsedData.articles, totalResults: parsedData.totalResults})
-}
-
- handlePrevClick = async ()=>{
-    console.log("Previous");
-    let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=1bbad9d74ba6431b95e7d9dc1f8ac4b3&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
-    let data = await fetch(url);
-    let parsedData = await data.json()
-    console.log(parsedData);  
+    let parsedData = await data.json();
+    console.log(parsedData);
     this.setState({
-        page: this.state.page - 1,
-        articles: parsedData.articles
-    })
+      articles: parsedData.articles,
+      totalResults: parsedData.totalResults,
+      loading:false
+    });
+  }
 
-}
+  handlePrevClick = async () => {
+    console.log("Previous");
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=1bbad9d74ba6431b95e7d9dc1f8ac4b3&page=${
+      this.state.page - 1
+    }&pageSize=${this.props.pageSize}`;
+    this.setState({ loading: true });
+    let data = await fetch(url);
+    let parsedData = await data.json();
+    console.log(parsedData);
+    this.setState({
+      page: this.state.page - 1,
+      articles: parsedData.articles,
+      loading: false,
+    });
+  };
 
- handleNextClick = async ()=>{
-    console.log("Next"); 
-    if (this.state.page + 1 > Math.ceil(this.state.totalResults/this.props.pageSize)){
-
+  handleNextClick = async () => {
+    console.log("Next");
+    if (
+      !(
+        this.state.page + 1 >
+        Math.ceil(this.state.totalResults / this.props.pageSize)
+      )
+    ) {
+      let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=1bbad9d74ba6431b95e7d9dc1f8ac4b3&page=${
+        this.state.page + 1
+      }&pageSize=${this.props.pageSize}`;
+      this.setState({ loading: true });
+      let data = await fetch(url);
+      let parsedData = await data.json();
+      this.setState({ loading: false });
+      this.setState({
+        page: this.state.page + 1,
+        articles: parsedData.articles,
+        loading: false,
+      });
     }
-    else{
-        let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=1bbad9d74ba6431b95e7d9dc1f8ac4b3&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
-        let data = await fetch(url);
-        let parsedData = await data.json()
-        console.log(parsedData);  
-        this.setState({
-            page: this.state.page + 1,
-            articles: parsedData.articles
-        })
-}
-}
+  };
 
-render() { 
+  render() {
     return (
-        <div className="container my-3">
-        <h1 className="text-center">NewsMonkey - Top Headlines</h1>
-        <Spinner/>
-          
-            <div className="row"> 
-            {this.state.articles.map((element)=>{
-                return <div className="col-md-4" key={element.url}>
-                    <NewsItem title={element.title?element.title:""} description={element.description?element.description:""} imageUrl={element.urlToImage} newsUrl={element.url}/>
-                </div> 
-            })} 
-            </div> 
-            <div className="container d-flex justify-content-between">
-            <button disabled={this.state.page<=1} type="button"  className="btn btn-warning" onClick={this.handlePrevClick}> &larr; Previous</button>
-            <button disabled={(this.state.page + 1 > Math.ceil(this.state.totalResults/this.props.pageSize))} type="button" className="btn btn-success" onClick={this.handleNextClick}>Next &rarr;</button>
-            </div>
+      <div className="container my-3">
+        <h1 className="text-center" style={{margin: `35px 0px;`}}>NewsMonkey - Top Headlines</h1>
+        {this.state.loading && <Spinner />}
+
+        <div className="row">
+          {!this.state.loading && this.state.articles.map((element) => {
+            return (
+              <div className="col-md-4" key={element.url}>
+                <NewsItem
+                  title={element.title ? element.title : ""}
+                  description={element.description ? element.description : ""}
+                  imageUrl={element.urlToImage}
+                  newsUrl={element.url}
+                />
+              </div>
+            );
+          })}
         </div>
-    )
-}
+        <div className="container d-flex justify-content-between">
+          <button
+            disabled={this.state.page <= 1}
+            type="button"
+            className="btn btn-warning"
+            onClick={this.handlePrevClick}
+          >
+            {" "}
+            &larr; Previous
+          </button>
+          <button
+            disabled={
+              this.state.page + 1 >
+              Math.ceil(this.state.totalResults / this.props.pageSize)
+            }
+            type="button"
+            className="btn btn-success"
+            onClick={this.handleNextClick}
+          >
+            Next &rarr;
+          </button>
+        </div>
+      </div>
+    );
+  }
 }
 
-export default News
+export default News;
